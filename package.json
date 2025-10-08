@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "init": "pnpm i && docker compose up -d && pnpm db:push",
     "build": "next build",
     "check": "biome check .",
     "check:unsafe": "biome check --write --unsafe .",

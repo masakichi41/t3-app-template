@@ -1,29 +1,69 @@
-# Create T3 App
+# T3 Stack テンプレート
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## 概要
 
-## What's next? How do I make an app with this?
+T3 Stack を使用したテンプレートプロジェクトです。
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Drizzle ORM
+- tRPC
+- NextAuth.js
+- Docker(PostgreSQL)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## 前提条件
+- Docker
+- Node.js
+- pnpm
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## 環境変数の設定
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+```bash
+cp .env.example .env
+```
 
-## Learn More
+`.env` ファイルを編集して環境変数を設定します。
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## 初回セットアップ
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```bash
+pnpm init
+```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+※ `pnpm i && docker compose up -d && pnpm db:push` を一括で実行します。
 
-## How do I deploy this?
+## pnpmコマンド
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```bash
+# 依存関係のインストール
+pnpm i
+
+# 開発サーバーの起動
+pnpm dev
+
+# DBマイグレーションの適用
+pnpm db:push
+
+# Drizzle Studioの起動
+pnpm db:studio
+```
+
+## Dockerコマンド
+
+```bash
+# 起動
+docker compose up -d
+
+# 状態確認
+docker compose ps
+
+# ログ確認
+docker compose logs -f
+
+# 停止
+docker compose down
+
+# ボリューム削除して停止
+docker compose down -v
+```
+
