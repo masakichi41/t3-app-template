@@ -14,6 +14,7 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "dev": "next dev --turbo",
+    "dev:all": "concurrently -k --names web,studio --prefix-colors blue.bold,magenta.bold \"pnpm dev\" \"pnpm db:studio\"",
     "preview": "next build && next start",
     "start": "next start",
     "typecheck": "tsc --noEmit"
@@ -41,6 +42,7 @@
     "@types/node": "^20.14.10",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "concurrently": "^9.2.1",
     "drizzle-kit": "^0.30.5",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.15",

@@ -41,11 +41,14 @@ pnpm i
 # 開発サーバーの起動
 pnpm dev
 
-# DBマイグレーションの適用
-pnpm db:push
-
 # Drizzle Studioの起動
 pnpm db:studio
+
+# 開発サーバーとDrizzle Studioの両方を起動
+pnpm dev:all
+
+# DBマイグレーションの適用
+pnpm db:push
 ```
 
 ## Dockerコマンド
