@@ -1,0 +1,7 @@
+{
+  "recommendations": ["biomejs.biome", "mhutchie.git-graph"],
+  "unwantedRecommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
