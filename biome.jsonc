@@ -1,11 +1,11 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
     "useIgnoreFile": true
   },
-  "files": { "ignoreUnknown": false, "ignore": [] },
+  "files": { "ignoreUnknown": false, "includes": ["**"] },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
@@ -13,7 +13,35 @@
     "lineEnding": "lf",
     "lineWidth": 80
   },
-  "organizeImports": { "enabled": true },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              // react imports
+              { "type": false, "source": ["react*", "react/**"] },
+              // package imports
+              { "type": false, "source": ":PACKAGE:" },
+              ":BLANK_LINE:",
+
+              // alias imports
+              { "type": false, "source": ":ALIAS:" },
+              ":BLANK_LINE:",
+
+              // side effect imports
+              { "type": false },
+              ":BLANK_LINE:",
+
+              // type imports
+              { "type": true }
+            ]
+          }
+        }
+      }
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
@@ -26,7 +54,18 @@
           }
         }
       },
-      "recommended": true
+      "style": {
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
+      }
     }
   }
 }
