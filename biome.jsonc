@@ -45,14 +45,9 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "nursery": {
-        "useSortedClasses": {
-          "level": "warn",
-          "fix": "safe",
-          "options": {
-            "functions": ["clsx", "cva", "cn"]
-          }
-        }
+      "recommended": true,
+      "complexity": {
+        "useArrowFunction": "error"
       },
       "style": {
         "noParameterAssign": "error",

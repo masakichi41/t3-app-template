@@ -1,13 +1,10 @@
-// テーブル定義とヘルパー
 export { createTable } from "./_table";
 export {
   accounts,
   type InsertAccount,
   type SelectAccount,
 } from "./accounts";
-// テーブルと型
-export { type InsertPost, posts, type SelectPost } from "./posts";
-// リレーション
+export { type InsertNote, notes, type SelectNote } from "./notes";
 export {
   accountsRelations,
   sessionsRelations,
