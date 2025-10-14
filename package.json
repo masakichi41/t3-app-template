@@ -13,7 +13,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "dev": "next dev --turbo",
+    "dev": "next dev --turbo --port 3304",
     "dev:all": "concurrently -k --names web,studio --prefix-colors blue.bold,magenta.bold \"pnpm dev\" \"pnpm db:studio\"",
     "preview": "next build && next start",
     "start": "next start",
