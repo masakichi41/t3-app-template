@@ -10,10 +10,13 @@ export const sessions = createTable(
     userId: d
       .varchar({ length: 255 })
       .notNull()
-      .references(() => users.id),
+      .references(() => users.id, { onDelete: "cascade" }),
     expires: d.timestamp({ mode: "date", withTimezone: true }).notNull(),
   }),
-  (t) => [index("t_user_id_idx").on(t.userId)],
+  (t) => [
+    index("session_user_id_idx").on(t.userId),
+    index("session_expires_idx").on(t.expires),
+  ],
 );
 
 export type InsertSession = typeof sessions.$inferInsert;

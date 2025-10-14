@@ -19,8 +19,3 @@ export {
   sessions,
 } from "./sessions";
 export { type InsertUser, type SelectUser, users } from "./users";
-export {
-  type InsertVerificationToken,
-  type SelectVerificationToken,
-  verificationTokens,
-} from "./verification-tokens";
