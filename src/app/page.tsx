@@ -4,7 +4,7 @@ import { Notes } from "@/app/_components/notes";
 import { auth } from "@/server/auth";
 import { api, HydrateClient } from "@/trpc/server";
 
-export default async function Home() {
+const Home = async () => {
   const session = await auth();
 
   if (session?.user) {
@@ -54,4 +54,6 @@ export default async function Home() {
       </main>
     </HydrateClient>
   );
-}
+};
+
+export default Home;

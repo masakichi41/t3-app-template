@@ -17,9 +17,9 @@ const geist = Geist({
   variable: "--font-geist-sans",
 });
 
-export default function RootLayout({
+const RootLayout = ({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html lang="en" className={`${geist.variable}`}>
       <body>
@@ -27,4 +27,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

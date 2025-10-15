@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run test:*)",
+      "Bash(gh issue view *)",
+      "Read(./src/**)"
+    ],
+    "ask": ["Bash(git push:*)"],
+    "deny": ["Bash(curl:*)", "Read(./.env)"]
+  }
+}
