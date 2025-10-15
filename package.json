@@ -6,9 +6,6 @@
   "scripts": {
     "init": "pnpm i && docker compose up -d && pnpm db:push",
     "build": "next build",
-    "check": "biome check .",
-    "check:unsafe": "biome check --write --unsafe .",
-    "check:write": "biome check --write .",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
@@ -17,6 +14,9 @@
     "dev:all": "concurrently -k --names web,studio --prefix-colors blue.bold,magenta.bold \"pnpm dev\" \"pnpm db:studio\"",
     "preview": "next build && next start",
     "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -37,16 +37,22 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.6",
+    "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.0.15",
     "@types/node": "^20.14.10",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "concurrently": "^9.2.1",
     "drizzle-kit": "^0.30.5",
+    "eslint": "^9.37.0",
+    "eslint-config-next": "^15.5.5",
+    "eslint-plugin-drizzle": "^0.2.3",
+    "eslint-plugin-import": "^2.32.0",
     "postcss": "^8.5.3",
+    "prettier": "^3.6.2",
     "tailwindcss": "^4.0.15",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.27.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.39.3"
