@@ -17,6 +17,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
+    "ci-check": "pnpm pnpm typecheck && pnpm lint:fix && pnpm format",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
