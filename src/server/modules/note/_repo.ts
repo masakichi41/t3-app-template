@@ -102,7 +102,7 @@ export async function findNotesByUserId(
       .select()
       .from(notes)
       .where(eq(notes.userId, userId))
-      .orderBy(desc(notes.updatedAt))
+      .orderBy(desc(notes.createdAt))
       .limit(limit)
       .offset(offset);
 
