@@ -7,7 +7,7 @@ import type { AdapterAccount } from "next-auth/adapters";
 
 export const accounts = createTable(
   "account",
-  (d) => ({
+  d => ({
     userId: d
       .varchar({ length: 255 })
       .notNull()
@@ -23,10 +23,7 @@ export const accounts = createTable(
     id_token: d.text(),
     session_state: d.varchar({ length: 255 }),
   }),
-  (t) => [
-    primaryKey({ columns: [t.provider, t.providerAccountId] }),
-    index("account_user_id_idx").on(t.userId),
-  ],
+  t => [primaryKey({ columns: [t.provider, t.providerAccountId] }), index("account_user_id_idx").on(t.userId)],
 );
 
 export type InsertAccount = typeof accounts.$inferInsert;

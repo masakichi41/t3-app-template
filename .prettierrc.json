@@ -1,7 +1,7 @@
 {
   "printWidth": 1000,
-  "semi": false,
-  "singleQuote": true,
+  "semi": true,
+  "singleQuote": false,
   "bracketSameLine": true,
   "arrowParens": "avoid",
   "htmlWhitespaceSensitivity": "ignore"

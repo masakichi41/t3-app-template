@@ -16,7 +16,7 @@ export const input = z
     title: z.string().min(1).max(100).optional(),
     content: z.string().min(1).max(10000).optional(),
   })
-  .refine((data) => data.title !== undefined || data.content !== undefined, {
+  .refine(data => data.title !== undefined || data.content !== undefined, {
     message: "少なくとも1つの更新項目（titleまたはcontent）が必要です",
   });
 export const output = NoteDTO;

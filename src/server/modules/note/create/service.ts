@@ -1,17 +1,13 @@
 import { toDTO } from "@/server/modules/note/_dto";
 import { insertNote } from "@/server/modules/note/_repo";
+import type { UserId } from "@/server/types/brand";
 import { type AppError, Errors } from "@/server/types/errors";
 import { type AsyncResult, Err, Ok } from "@/server/types/result";
+import type { Deps } from "@/server/utils/deps";
 
 import { input, type Output, type Request } from "./contract";
 
-import type { UserId } from "@/server/types/brand";
-import type { Deps } from "@/server/utils/deps";
-
-export const execute = async (
-  deps: Deps,
-  cmd: Request,
-): AsyncResult<Output, AppError> => {
+export const execute = async (deps: Deps, cmd: Request): AsyncResult<Output, AppError> => {
   const p = input.safeParse({
     ...cmd,
     userId: deps.authUserId,
@@ -20,7 +16,7 @@ export const execute = async (
     return Err(Errors.validation("INVALID_INPUT", p.error.issues));
   }
 
-  return deps.db.transaction(async (tx) => {
+  return deps.db.transaction(async tx => {
     const note = await insertNote(tx, {
       userId: p.data.userId as UserId,
       title: p.data.title,

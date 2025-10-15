@@ -1,17 +1,12 @@
 import { and, desc, eq, sql } from "drizzle-orm";
 
-import {
-  type InsertNote,
-  notes,
-  type SelectNote,
-} from "@/server/db/schema/notes";
+import type { DBLike } from "@/server/db";
+import { type InsertNote, notes, type SelectNote } from "@/server/db/schema/notes";
+import type { NoteId, UserId } from "@/server/types/brand";
 import { type AppError, Errors } from "@/server/types/errors";
 import { Err, Ok } from "@/server/types/result";
-import { type DefinedPatch, pickDefined } from "@/server/utils/object";
-
-import type { DBLike } from "@/server/db";
-import type { NoteId, UserId } from "@/server/types/brand";
 import type { AsyncResult } from "@/server/types/result";
+import { type DefinedPatch, pickDefined } from "@/server/utils/object";
 
 export const insertNote = async (
   db: DBLike,
@@ -85,26 +80,16 @@ export const deleteNoteById = async (
     if (!note) {
       return Err(Errors.notFound());
     }
-    return Ok(note as SelectNote);
+    return Ok(note);
   } catch (e) {
     return Err(Errors.infraDb("DB_ERROR", e));
   }
 };
 
-export async function findNotesByUserId(
-  db: DBLike,
-  userId: UserId,
-  opts?: { limit?: number; offset?: number },
-): AsyncResult<SelectNote[], AppError> {
+export async function findNotesByUserId(db: DBLike, userId: UserId, opts?: { limit?: number; offset?: number }): AsyncResult<SelectNote[], AppError> {
   try {
     const { limit = 50, offset = 0 } = opts ?? {};
-    const rows = await db
-      .select()
-      .from(notes)
-      .where(eq(notes.userId, userId))
-      .orderBy(desc(notes.createdAt))
-      .limit(limit)
-      .offset(offset);
+    const rows = await db.select().from(notes).where(eq(notes.userId, userId)).orderBy(desc(notes.createdAt)).limit(limit).offset(offset);
 
     return Ok(rows);
   } catch (e) {

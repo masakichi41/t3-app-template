@@ -1,7 +1,7 @@
 import { createTable } from "./_table";
 import { users } from "./users";
 
-export const notes = createTable("note", (d) => ({
+export const notes = createTable("note", d => ({
   id: d
     .varchar({ length: 255 })
     .notNull()

@@ -3,7 +3,7 @@
   "vcs": {
     "enabled": true,
     "clientKind": "git",
-    "useIgnoreFile": true
+    "useIgnoreFile": true,
   },
   "files": { "ignoreUnknown": false, "includes": ["**"] },
   "formatter": {
@@ -11,7 +11,7 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 80
+    "lineWidth": 80,
   },
   "assist": {
     "actions": {
@@ -35,19 +35,19 @@
               ":BLANK_LINE:",
 
               // type imports
-              { "type": true }
-            ]
-          }
-        }
-      }
-    }
+              { "type": true },
+            ],
+          },
+        },
+      },
+    },
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
       "complexity": {
-        "useArrowFunction": "error"
+        "useArrowFunction": "error",
       },
       "style": {
         "noParameterAssign": "error",
@@ -59,8 +59,8 @@
         "noUnusedTemplateLiteral": "error",
         "useNumberNamespace": "error",
         "noInferrableTypes": "error",
-        "noUselessElse": "error"
-      }
-    }
-  }
+        "noUselessElse": "error",
+      },
+    },
+  },
 }

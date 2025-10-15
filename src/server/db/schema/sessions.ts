@@ -5,7 +5,7 @@ import { users } from "./users";
 
 export const sessions = createTable(
   "session",
-  (d) => ({
+  d => ({
     sessionToken: d.varchar({ length: 255 }).notNull().primaryKey(),
     userId: d
       .varchar({ length: 255 })
@@ -13,10 +13,7 @@ export const sessions = createTable(
       .references(() => users.id, { onDelete: "cascade" }),
     expires: d.timestamp({ mode: "date", withTimezone: true }).notNull(),
   }),
-  (t) => [
-    index("session_user_id_idx").on(t.userId),
-    index("session_expires_idx").on(t.expires),
-  ],
+  t => [index("session_user_id_idx").on(t.userId), index("session_expires_idx").on(t.expires)],
 );
 
 export type InsertSession = typeof sessions.$inferInsert;

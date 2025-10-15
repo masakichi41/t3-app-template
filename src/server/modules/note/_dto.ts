@@ -1,8 +1,7 @@
 import { z } from "zod";
 
-import { NoteId, UserId } from "@/server/types/brand";
-
 import type { SelectNote } from "@/server/db/schema/notes";
+import { NoteId, UserId } from "@/server/types/brand";
 
 export const NoteDTO = z.object({
   id: NoteId,

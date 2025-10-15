@@ -4,7 +4,7 @@ import { createTable } from "./_table";
 
 export const users = createTable(
   "user",
-  (d) => ({
+  d => ({
     id: d
       .varchar({ length: 255 })
       .notNull()
@@ -15,7 +15,7 @@ export const users = createTable(
     emailVerified: d.timestamp({ mode: "date", withTimezone: true }),
     image: d.varchar({ length: 255 }),
   }),
-  (t) => [uniqueIndex("user_email_unique").on(t.email)],
+  t => [uniqueIndex("user_email_unique").on(t.email)],
 );
 
 export type InsertUser = typeof users.$inferInsert;

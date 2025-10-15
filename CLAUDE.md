@@ -131,17 +131,18 @@ contract.ts では以下の4つのスキーマを定義：
 GoライクなResult型を使用し、エラーを値として扱う：
 
 ```typescript
-type Result<T, E> = Ok<T> | Err<E>
-type AsyncResult<T, E = Error> = Promise<Result<T, E>>
+type Result<T, E> = Ok<T> | Err<E>;
+type AsyncResult<T, E = Error> = Promise<Result<T, E>>;
 ```
 
 使用例：
+
 ```typescript
-const result = await someOperation()
+const result = await someOperation();
 if (!result.success) {
-  return Err(result.error)
+  return Err(result.error);
 }
-return Ok(result.data)
+return Ok(result.data);
 ```
 
 #### AppError型
@@ -150,20 +151,21 @@ return Ok(result.data)
 
 ```typescript
 type AppError = {
-  kind: ErrorKind  // "validation" | "not_found" | "conflict" | "auth" など
-  code: string     // 機械判定用コード
-  message?: string // 内部向けメッセージ
-  safeMessage?: string // 外部向けメッセージ
-  details?: unknown // ZodIssue[] など詳細情報
-  cause?: unknown  // 元のエラー
-}
+  kind: ErrorKind; // "validation" | "not_found" | "conflict" | "auth" など
+  code: string; // 機械判定用コード
+  message?: string; // 内部向けメッセージ
+  safeMessage?: string; // 外部向けメッセージ
+  details?: unknown; // ZodIssue[] など詳細情報
+  cause?: unknown; // 元のエラー
+};
 ```
 
 エラーファクトリを使用：
+
 ```typescript
-Errors.validation("INVALID_INPUT", zodError.issues)
-Errors.notFound()
-Errors.infraDb("DB_ERROR", error)
+Errors.validation("INVALID_INPUT", zodError.issues);
+Errors.notFound();
+Errors.infraDb("DB_ERROR", error);
 ```
 
 ### 型安全性
@@ -173,9 +175,9 @@ Errors.infraDb("DB_ERROR", error)
 型安全性を高めるためのブランド型を使用（`src/server/types/brand.ts`）：
 
 ```typescript
-type Brand<T, B> = T & { __brand: B }
-type UserId = Brand<string, "UserId">
-type NoteId = Brand<string, "NoteId">
+type Brand<T, B> = T & { __brand: B };
+type UserId = Brand<string, "UserId">;
+type NoteId = Brand<string, "NoteId">;
 ```
 
 これにより、単純な文字列の混同を防ぐ。
@@ -185,7 +187,7 @@ type NoteId = Brand<string, "NoteId">
 トランザクション対応のためのデータベース型抽象化：
 
 ```typescript
-type DBLike = typeof db | Parameters<Parameters<typeof db.transaction>[0]>[0]
+type DBLike = typeof db | Parameters<Parameters<typeof db.transaction>[0]>[0];
 ```
 
 リポジトリ関数はすべて `DBLike` を受け取ることで、通常のDB操作とトランザクション内操作の両方に対応。
@@ -223,8 +225,8 @@ function foo() {}
 export function bar() {}
 
 // ✅ OK
-const foo = () => {}
-export const bar = () => {}
+const foo = () => {};
+export const bar = () => {};
 ```
 
 #### コードスタイル
@@ -241,7 +243,7 @@ export const bar = () => {}
 export const appRouter = createTRPCRouter({
   post: postRouter,
   // 新しいルーターをここに追加
-})
+});
 ```
 
 ### 環境変数

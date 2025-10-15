@@ -3,6 +3,7 @@
 ## 概要
 
 T3 Stack を使用したテンプレートプロジェクトです。
+
 - Next.js
 - TypeScript
 - Tailwind CSS
@@ -12,6 +13,7 @@ T3 Stack を使用したテンプレートプロジェクトです。
 - Docker(PostgreSQL)
 
 ## 前提条件
+
 - Docker
 - Node.js
 - pnpm
@@ -69,4 +71,3 @@ docker compose down
 # ボリューム削除して停止
 docker compose down -v
 ```
-

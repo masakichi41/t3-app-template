@@ -1,18 +1,7 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
 
-const {
-  NODE_ENV,
-  AUTH_SECRET,
-  AUTH_DISCORD_ID,
-  AUTH_DISCORD_SECRET,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  POSTGRES_DB,
-  POSTGRES_HOST,
-  POSTGRES_PORT,
-  SKIP_ENV_VALIDATION,
-} = process.env;
+const { NODE_ENV, AUTH_SECRET, AUTH_DISCORD_ID, AUTH_DISCORD_SECRET, POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT, SKIP_ENV_VALIDATION } = process.env;
 
 export const env = createEnv({
   /**
@@ -24,9 +13,7 @@ export const env = createEnv({
     AUTH_DISCORD_ID: z.string(),
     AUTH_DISCORD_SECRET: z.string(),
     DATABASE_URL: z.string().url(),
-    NODE_ENV: z
-      .enum(["development", "test", "production"])
-      .default("development"),
+    NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   },
 
   /**
