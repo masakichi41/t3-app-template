@@ -8,7 +8,7 @@ const compat = new FlatCompat({
   baseDirectory: import.meta.dirname,
 });
 
-export default [
+const config = [
   {
     ignores: [".next/**", "node_modules/**", "dist/**", "build/**", "next-env.d.ts"],
   },
@@ -19,6 +19,7 @@ export default [
   {
     files: ["**/*.ts", "**/*.tsx"],
     plugins: {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       drizzle,
     },
     rules: {
@@ -71,3 +72,5 @@ export default [
     },
   },
 ];
+
+export default config;
