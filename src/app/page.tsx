@@ -20,8 +20,12 @@ export default async function Home() {
             <h1 className="font-bold text-2xl">Note App</h1>
             {session?.user && (
               <div className="flex items-center gap-4">
-                <span className="text-white/80">{session.user.name ?? session.user.email}</span>
-                <Link href="/api/auth/signout" className="rounded-lg bg-white/10 px-4 py-2 font-semibold transition hover:bg-white/20">
+                <span className="text-white/80">
+                  {session.user.name ?? session.user.email}
+                </span>
+                <Link
+                  href="/api/auth/signout"
+                  className="rounded-lg bg-white/10 px-4 py-2 font-semibold transition hover:bg-white/20">
                   ログアウト
                 </Link>
               </div>
@@ -36,8 +40,12 @@ export default async function Home() {
           ) : (
             <div className="flex flex-col items-center gap-8 py-16">
               <h2 className="font-bold text-4xl">ようこそ！</h2>
-              <p className="text-center text-white/80 text-xl">Noteアプリを使用するにはログインしてください</p>
-              <Link href="/api/auth/signin" className="rounded-lg bg-white/10 px-8 py-4 font-semibold text-lg transition hover:bg-white/20">
+              <p className="text-center text-white/80 text-xl">
+                Noteアプリを使用するにはログインしてください
+              </p>
+              <Link
+                href="/api/auth/signin"
+                className="rounded-lg bg-white/10 px-8 py-4 font-semibold text-lg transition hover:bg-white/20">
                 ログイン
               </Link>
             </div>
