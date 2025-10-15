@@ -5,7 +5,11 @@ import { env } from "@/env";
 
 import { accounts } from "./schema/accounts";
 import { notes } from "./schema/notes";
-import { accountsRelations, sessionsRelations, usersRelations } from "./schema/relations";
+import {
+  accountsRelations,
+  sessionsRelations,
+  usersRelations,
+} from "./schema/relations";
 import { sessions } from "./schema/sessions";
 import { users } from "./schema/users";
 
@@ -32,4 +36,6 @@ if (env.NODE_ENV !== "production") globalForDb.conn = conn;
 
 export const db = drizzle(conn, { schema });
 
-export type DBLike = typeof db | Parameters<Parameters<typeof db.transaction>[0]>[0];
+export type DBLike =
+  | typeof db
+  | Parameters<Parameters<typeof db.transaction>[0]>[0];

@@ -1,6 +1,15 @@
 import { TRPCError } from "@trpc/server";
 
-export type ErrorKind = "validation" | "domain" | "not_found" | "conflict" | "auth" | "permission" | "infra_db" | "infra_external" | "unknown";
+export type ErrorKind =
+  | "validation"
+  | "domain"
+  | "not_found"
+  | "conflict"
+  | "auth"
+  | "permission"
+  | "infra_db"
+  | "infra_external"
+  | "unknown";
 
 export type AppError = {
   kind: ErrorKind;
@@ -59,7 +68,14 @@ export const Errors = {
   }),
 };
 
-export type TrpcCode = "BAD_REQUEST" | "UNAUTHORIZED" | "FORBIDDEN" | "NOT_FOUND" | "CONFLICT" | "TOO_MANY_REQUESTS" | "INTERNAL_SERVER_ERROR";
+export type TrpcCode =
+  | "BAD_REQUEST"
+  | "UNAUTHORIZED"
+  | "FORBIDDEN"
+  | "NOT_FOUND"
+  | "CONFLICT"
+  | "TOO_MANY_REQUESTS"
+  | "INTERNAL_SERVER_ERROR";
 
 export const toTrpcCode = (kind: ErrorKind): TrpcCode => {
   switch (kind) {

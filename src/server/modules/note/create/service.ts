@@ -7,7 +7,10 @@ import type { Deps } from "@/server/utils/deps";
 
 import { input, type Output, type Request } from "./contract";
 
-export const execute = async (deps: Deps, cmd: Request): AsyncResult<Output, AppError> => {
+export const execute = async (
+  deps: Deps,
+  cmd: Request,
+): AsyncResult<Output, AppError> => {
   const p = input.safeParse({
     ...cmd,
     userId: deps.authUserId,
