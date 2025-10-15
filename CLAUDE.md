@@ -19,7 +19,7 @@
 - **tRPC 11** - 型安全なAPI
 - **NextAuth.js v5** (Auth.js) - 認証機能
 - **Drizzle ORM** - PostgreSQL対応
-- **Tailwind CSS v4** - スタイリング
+- **Chakra UI** - スタイリング
 - **React 19** - React Query対応
 - **ESLint 9** + **Prettier** - コード品質管理
 
