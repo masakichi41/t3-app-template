@@ -3,19 +3,13 @@
     "context7": {
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "@upstash/context7-mcp"
-      ],
+      "args": ["-y", "@upstash/context7-mcp"],
       "env": {}
     },
     "playwright": {
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "@playwright/mcp@latest"
-      ],
+      "args": ["-y", "@playwright/mcp@latest"],
       "env": {}
     },
     "figma-dev-mode-mcp-server": {
@@ -25,10 +19,7 @@
     "chakra-ui": {
       "type": "stdio",
       "command": "npx",
-      "args": [
-        "-y",
-        "@chakra-ui/react-mcp"
-      ],
+      "args": ["-y", "@chakra-ui/react-mcp"],
       "env": {}
     }
   }
