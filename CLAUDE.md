@@ -108,7 +108,7 @@ docker compose logs -f   # ログ表示
    - `{action}/service.ts` - ビジネスロジック
    - `{action}/endpoint.trpc.ts` - APIエンドポイント
 5. `src/server/api/root.ts`にルーターを登録
-6. `pnpm typecheck && pnpm lint`で検証
+6. `pnpm ci-check`で検証（typecheck + lint + format）
 
 ### コーディング規約
 
@@ -138,6 +138,17 @@ export const bar = () => {};
 2. **サービスで検証** - `.parse()`ではなく`.safeParse()`を使用
 3. **エンドポイントで変換** - `AppError`を`TRPCError`に変換
 4. **トランザクションスコープ** - リポジトリではなくサービス層でラップ
+
+#### コード品質チェック
+
+**重要：すべてのコード変更後は必ず `pnpm ci-check` を実行してください。**
+
+このコマンドは以下をまとめて実行します：
+- `pnpm typecheck` - TypeScript型エラーの検証
+- `pnpm lint` - ESLintによるコード品質チェック
+- `pnpm format` - Prettierによるコードフォーマット確認
+
+コミットやプルリクエストの前に必ずこのチェックを通すことで、コード品質を保証します。
 
 ### Claude Agents
 

@@ -1,4 +1,6 @@
+import { Box, Button, Container, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import Link from "next/link";
+
 
 import { Notes } from "@/app/_components/notes";
 import { auth } from "@/server/auth";
@@ -13,45 +15,68 @@ export default async function Home() {
 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <Box
+        minH="100vh"
+        bgGradient="to-b"
+        gradientFrom="purple.900"
+        gradientTo="gray.900"
+        color="white"
+      >
         {/* ヘッダー */}
-        <div className="w-full border-b border-white/10 bg-white/5">
-          <div className="container mx-auto flex items-center justify-between px-4 py-4">
-            <h1 className="font-bold text-2xl">Note App</h1>
-            {session?.user && (
-              <div className="flex items-center gap-4">
-                <span className="text-white/80">
-                  {session.user.name ?? session.user.email}
-                </span>
-                <Link
-                  href="/api/auth/signout"
-                  className="rounded-lg bg-white/10 px-4 py-2 font-semibold transition hover:bg-white/20">
-                  ログアウト
-                </Link>
-              </div>
-            )}
-          </div>
-        </div>
+        <Box borderBottomWidth="1px" borderColor="whiteAlpha.200" bg="whiteAlpha.100">
+          <Container maxW="container.xl">
+            <HStack justify="space-between" py={4}>
+              <Heading size="xl" fontWeight="bold">
+                Note App
+              </Heading>
+              {session?.user && (
+                <HStack gap={4}>
+                  <Text color="whiteAlpha.800">
+                    {session.user.name ?? session.user.email}
+                  </Text>
+                  <Button
+                    asChild
+                    rounded="lg"
+                    bg="whiteAlpha.200"
+                    fontWeight="semibold"
+                    _hover={{ bg: "whiteAlpha.300" }}
+                  >
+                    <Link href="/api/auth/signout">ログアウト</Link>
+                  </Button>
+                </HStack>
+              )}
+            </HStack>
+          </Container>
+        </Box>
 
         {/* メインコンテンツ */}
-        <div className="container flex flex-col items-center px-4 py-12">
+        <Container maxW="container.xl" py={12}>
           {session?.user ? (
             <Notes />
           ) : (
-            <div className="flex flex-col items-center gap-8 py-16">
-              <h2 className="font-bold text-4xl">ようこそ！</h2>
-              <p className="text-center text-white/80 text-xl">
+            <Stack align="center" gap={8} py={16}>
+              <Heading size="4xl" fontWeight="bold">
+                ようこそ！
+              </Heading>
+              <Text color="whiteAlpha.800" textAlign="center" textStyle="xl">
                 Noteアプリを使用するにはログインしてください
-              </p>
-              <Link
-                href="/api/auth/signin"
-                className="rounded-lg bg-white/10 px-8 py-4 font-semibold text-lg transition hover:bg-white/20">
-                ログイン
-              </Link>
-            </div>
+              </Text>
+              <Button
+                asChild
+                rounded="lg"
+                bg="whiteAlpha.200"
+                px={8}
+                py={4}
+                fontWeight="semibold"
+                fontSize="lg"
+                _hover={{ bg: "whiteAlpha.300" }}
+              >
+                <Link href="/api/auth/signin">ログイン</Link>
+              </Button>
+            </Stack>
           )}
-        </div>
-      </main>
+        </Container>
+      </Box>
     </HydrateClient>
   );
 }
