@@ -1,73 +1,36 @@
-# T3 Stack テンプレート
+# サンプル（プロダクト名）
 
-## 概要
+[![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2025/05/JPHACKS2025_ogp.jpg)](https://www.youtube.com/watch?v=lA9EluZugD8)
 
-T3 Stack を使用したテンプレートプロジェクトです。
+## 製品概要
+### 背景(製品開発のきっかけ、課題等）
+### 製品説明（具体的な製品の説明）
+### 特長
+#### 1. 特長1
+#### 2. 特長2
+#### 3. 特長3
 
-- Next.js
-- TypeScript
-- Tailwind CSS
-- Drizzle ORM
-- tRPC
-- NextAuth.js
-- Docker(PostgreSQL)
+### 解決出来ること
+### 今後の展望
+### 注力したこと（こだわり等）
+* 
+* 
 
-## 前提条件
+## 開発技術
+### 活用した技術
+#### API・データ
+* 
+* 
 
-- Docker
-- Node.js
-- pnpm
+#### フレームワーク・ライブラリ・モジュール
+* 
+* 
 
-## 環境変数の設定
+#### デバイス
+* 
+* 
 
-```bash
-cp .env.example .env
-```
-
-`.env` ファイルを編集して環境変数を設定します。
-
-## 初回セットアップ
-
-```bash
-pnpm init
-```
-
-※ `pnpm i && docker compose up -d && pnpm db:push` を一括で実行します。
-
-## pnpmコマンド
-
-```bash
-# 依存関係のインストール
-pnpm i
-
-# 開発サーバーの起動
-pnpm dev
-
-# Drizzle Studioの起動
-pnpm db:studio
-
-# 開発サーバーとDrizzle Studioの両方を起動
-pnpm dev:all
-
-# DBマイグレーションの適用
-pnpm db:push
-```
-
-## Dockerコマンド
-
-```bash
-# 起動
-docker compose up -d
-
-# 状態確認
-docker compose ps
-
-# ログ確認
-docker compose logs -f
-
-# 停止
-docker compose down
-
-# ボリューム削除して停止
-docker compose down -v
-```
+### 独自技術
+#### ハッカソンで開発した独自機能・技術
+* 独自で開発したものの内容をこちらに記載してください
+* 特に力を入れた部分をファイルリンク、またはcommit_idを記載してください。
