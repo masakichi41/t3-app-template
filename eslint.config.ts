@@ -10,13 +10,7 @@ const compat = new FlatCompat({
 
 const config = [
   {
-    ignores: [
-      ".next/**",
-      "node_modules/**",
-      "dist/**",
-      "build/**",
-      "next-env.d.ts",
-    ],
+    ignores: [".next/**", "node_modules/**", "dist/**", "build/**", "next-env.d.ts", "src/components/ui/**"],
   },
   ...compat.extends("next/core-web-vitals"),
   ...tseslint.configs.recommended,
