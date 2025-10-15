@@ -15,6 +15,7 @@ export const insertNote = async (
     userId: UserId;
     title: string;
     content: string;
+    now: Date;
   },
 ): AsyncResult<SelectNote, AppError> => {
   try {
@@ -24,6 +25,7 @@ export const insertNote = async (
         userId: values.userId,
         title: values.title,
         content: values.content,
+        createdAt: values.now,
       } satisfies InsertNote)
       .returning();
     if (!note) {
@@ -44,6 +46,7 @@ export const updateNoteById = async (
   values: {
     title?: string;
     content?: string;
+    now: Date;
   },
 ): AsyncResult<SelectNote, AppError> => {
   try {
@@ -53,7 +56,7 @@ export const updateNoteById = async (
       .update(notes)
       .set({
         ...patch,
-        updatedAt: new Date(),
+        updatedAt: values.now,
       })
       .where(and(eq(notes.id, key.id), eq(notes.userId, key.userId)))
       .returning();

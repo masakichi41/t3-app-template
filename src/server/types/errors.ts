@@ -1,4 +1,5 @@
-// エラーの正規形（Goライクに「値」として扱う）
+import { TRPCError } from "@trpc/server";
+
 export type ErrorKind =
   | "validation"
   | "domain"
@@ -66,3 +67,36 @@ export const Errors = {
     safeMessage: "internal error",
   }),
 };
+
+export type TrpcCode =
+  | "BAD_REQUEST"
+  | "UNAUTHORIZED"
+  | "FORBIDDEN"
+  | "NOT_FOUND"
+  | "CONFLICT"
+  | "TOO_MANY_REQUESTS"
+  | "INTERNAL_SERVER_ERROR";
+
+export const toTrpcCode = (kind: ErrorKind): TrpcCode => {
+  switch (kind) {
+    case "validation":
+      return "BAD_REQUEST";
+    case "auth":
+      return "UNAUTHORIZED";
+    case "permission":
+      return "FORBIDDEN";
+    case "not_found":
+      return "NOT_FOUND";
+    case "conflict":
+      return "CONFLICT";
+    default:
+      return "INTERNAL_SERVER_ERROR";
+  }
+};
+
+export const toTrpcError = (e: AppError): TRPCError =>
+  new TRPCError({
+    code: toTrpcCode(e.kind),
+    message: e.safeMessage ?? e.code,
+    cause: e.cause ?? e.details,
+  });

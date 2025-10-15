@@ -1,28 +1,36 @@
-import { db } from "@/server/db";
 import { toDTO } from "@/server/modules/note/_dto";
 import { insertNote } from "@/server/modules/note/_repo";
 import { type AppError, Errors } from "@/server/types/errors";
 import { type AsyncResult, Err, Ok } from "@/server/types/result";
 
-import { input, type Output } from "./contract";
+import { input, type Output, type Request } from "./contract";
 
 import type { UserId } from "@/server/types/brand";
+import type { Deps } from "@/server/utils/deps";
 
-export const execute = async (raw: unknown): AsyncResult<Output, AppError> => {
-  const p = input.safeParse(raw);
+export const execute = async (
+  deps: Deps,
+  cmd: Request,
+): AsyncResult<Output, AppError> => {
+  const p = input.safeParse({
+    ...cmd,
+    userId: deps.authUserId,
+  });
   if (!p.success) {
     return Err(Errors.validation("INVALID_INPUT", p.error.issues));
   }
 
-  const note = await insertNote(db, {
-    userId: p.data.userId as UserId,
-    title: p.data.title,
-    content: p.data.content,
+  return deps.db.transaction(async (tx) => {
+    const note = await insertNote(tx, {
+      userId: p.data.userId as UserId,
+      title: p.data.title,
+      content: p.data.content,
+      now: deps.now(),
+    });
+    if (!note.success) {
+      return Err(note.error);
+    }
+
+    return Ok(toDTO(note.data));
   });
-
-  if (!note.success) {
-    return Err(note.error);
-  }
-
-  return Ok(toDTO(note.data));
 };
