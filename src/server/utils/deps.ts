@@ -1,18 +1,15 @@
-import type { db } from "@/server/db";
+import type { DBLike } from "@/server/db";
 
-export type Deps = {
-  db: typeof db;
-  authUserId: string | null;
-  now: () => Date;
-};
+export type BaseDeps = { db: DBLike };
+export type PublicDeps = BaseDeps & { authUserId: null };
+export type AuthDeps = BaseDeps & { authUserId: string };
+export type Deps = PublicDeps | AuthDeps;
 
-export const createDeps = (
-  database: typeof db,
-  authUserId: string | null,
-): Deps => {
-  return {
-    db: database,
-    authUserId,
-    now: () => new Date(),
-  };
-};
+export const createPublicDeps = (db: DBLike): PublicDeps => ({
+  db,
+  authUserId: null,
+});
+export const createAuthDeps = (db: DBLike, userId: string): AuthDeps => ({
+  db,
+  authUserId: userId,
+});

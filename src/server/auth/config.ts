@@ -2,7 +2,9 @@ import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import DiscordProvider from "next-auth/providers/discord";
 
 import { db } from "@/server/db";
-import { accounts, sessions, users } from "@/server/db/schema";
+import { accounts } from "@/server/db/schema/accounts";
+import { sessions } from "@/server/db/schema/sessions";
+import { users } from "@/server/db/schema/users";
 
 import type { DefaultSession, NextAuthConfig } from "next-auth";
 

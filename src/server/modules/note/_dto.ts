@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { NoteId, UserId } from "@/server/types/brand";
 
-import type { SelectNote } from "@/server/db/schema";
+import type { SelectNote } from "@/server/db/schema/notes";
 
 export const NoteDTO = z.object({
   id: NoteId,

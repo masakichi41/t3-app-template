@@ -1,6 +1,10 @@
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 
-import { type InsertNote, notes, type SelectNote } from "@/server/db/schema";
+import {
+  type InsertNote,
+  notes,
+  type SelectNote,
+} from "@/server/db/schema/notes";
 import { type AppError, Errors } from "@/server/types/errors";
 import { Err, Ok } from "@/server/types/result";
 import { type DefinedPatch, pickDefined } from "@/server/utils/object";
@@ -15,7 +19,6 @@ export const insertNote = async (
     userId: UserId;
     title: string;
     content: string;
-    now: Date;
   },
 ): AsyncResult<SelectNote, AppError> => {
   try {
@@ -25,7 +28,6 @@ export const insertNote = async (
         userId: values.userId,
         title: values.title,
         content: values.content,
-        createdAt: values.now,
       } satisfies InsertNote)
       .returning();
     if (!note) {
@@ -46,7 +48,6 @@ export const updateNoteById = async (
   values: {
     title?: string;
     content?: string;
-    now: Date;
   },
 ): AsyncResult<SelectNote, AppError> => {
   try {
@@ -56,7 +57,7 @@ export const updateNoteById = async (
       .update(notes)
       .set({
         ...patch,
-        updatedAt: values.now,
+        updatedAt: sql`now()`,
       })
       .where(and(eq(notes.id, key.id), eq(notes.userId, key.userId)))
       .returning();

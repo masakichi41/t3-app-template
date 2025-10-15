@@ -25,7 +25,6 @@ export const execute = async (
       userId: p.data.userId as UserId,
       title: p.data.title,
       content: p.data.content,
-      now: deps.now(),
     });
     if (!note.success) {
       return Err(note.error);
