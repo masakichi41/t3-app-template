@@ -65,9 +65,7 @@ if [[ $TYPECHECK_OK -eq 1 ]] && [[ $LINT_OK -eq 1 ]] && [[ $FORMAT_OK -eq 1 ]]; 
   cat "$TEMP_OUTPUT" | jq -Rs '{
     decision: "approve",
     reason: "コード品質チェック完了",
-    hookSpecificOutput: {
-      additionalContext: .
-    }
+    systemMessage: .
   }'
   exit 0
 else
@@ -79,9 +77,7 @@ else
   cat "$TEMP_OUTPUT" | jq -Rs '{
     decision: "block",
     reason: "コード品質チェックに失敗しました",
-    hookSpecificOutput: {
-      additionalContext: .
-    }
+    systemMessage: .
   }'
   exit 2
 fi

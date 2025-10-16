@@ -45,7 +45,7 @@ cp .env.example .env
 # .envファイルを必要な値で編集
 
 # 3. プロジェクトの初期化（ワンコマンド）
-pnpm init
+pnpm run init
 # 実行内容：pnpm i && docker compose up -d && pnpm db:push
 
 # 4. 開発サーバーの起動
@@ -108,7 +108,6 @@ docker compose logs -f   # ログ表示
    - `{action}/service.ts` - ビジネスロジック
    - `{action}/endpoint.trpc.ts` - APIエンドポイント
 5. `src/server/api/root.ts`にルーターを登録
-6. `pnpm ci-check`で検証（typecheck + lint + format）
 
 ### コーディング規約
 
