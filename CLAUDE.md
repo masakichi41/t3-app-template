@@ -144,6 +144,7 @@ export const bar = () => {};
 **重要：すべてのコード変更後は必ず `pnpm ci-check` を実行してください。**
 
 このコマンドは以下をまとめて実行します：
+
 - `pnpm typecheck` - TypeScript型エラーの検証
 - `pnpm lint` - ESLintによるコード品質チェック
 - `pnpm format` - Prettierによるコードフォーマット確認
@@ -270,7 +271,10 @@ export const output = NoteDTO;           // サービス出力
 #### サービス実装
 
 ```typescript
-export const execute = async (deps: Deps, cmd: Request): AsyncResult<Output, AppError> => {
+export const execute = async (
+  deps: Deps,
+  cmd: Request,
+): AsyncResult<Output, AppError> => {
   // 認証チェック
   if (!deps.authUserId) return Err(Errors.auth());
 

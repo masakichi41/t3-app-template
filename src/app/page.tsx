@@ -1,6 +1,13 @@
-import { Box, Button, Container, Heading, HStack, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  HStack,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import Link from "next/link";
-
 
 import { Notes } from "@/app/_components/notes";
 import { auth } from "@/server/auth";
@@ -20,10 +27,12 @@ export default async function Home() {
         bgGradient="to-b"
         gradientFrom="purple.900"
         gradientTo="gray.900"
-        color="white"
-      >
+        color="white">
         {/* ヘッダー */}
-        <Box borderBottomWidth="1px" borderColor="whiteAlpha.200" bg="whiteAlpha.100">
+        <Box
+          borderBottomWidth="1px"
+          borderColor="whiteAlpha.200"
+          bg="whiteAlpha.100">
           <Container maxW="container.xl">
             <HStack justify="space-between" py={4}>
               <Heading size="xl" fontWeight="bold">
@@ -39,8 +48,7 @@ export default async function Home() {
                     rounded="lg"
                     bg="whiteAlpha.200"
                     fontWeight="semibold"
-                    _hover={{ bg: "whiteAlpha.300" }}
-                  >
+                    _hover={{ bg: "whiteAlpha.300" }}>
                     <Link href="/api/auth/signout">ログアウト</Link>
                   </Button>
                 </HStack>
@@ -69,8 +77,7 @@ export default async function Home() {
                 py={4}
                 fontWeight="semibold"
                 fontSize="lg"
-                _hover={{ bg: "whiteAlpha.300" }}
-              >
+                _hover={{ bg: "whiteAlpha.300" }}>
                 <Link href="/api/auth/signin">ログイン</Link>
               </Button>
             </Stack>

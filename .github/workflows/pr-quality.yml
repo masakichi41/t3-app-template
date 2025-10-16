@@ -58,7 +58,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run format check
-        run: pnpm exec prettier --check .
+        run: pnpm format:check
 
   typecheck:
     if: github.event.pull_request.draft == false

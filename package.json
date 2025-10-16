@@ -17,6 +17,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "ci-check": "pnpm pnpm typecheck && pnpm lint:fix && pnpm format",
     "typecheck": "tsc --noEmit"
   },
@@ -54,6 +55,7 @@
     "eslint-plugin-drizzle": "^0.2.3",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^7.0.0",
+    "lefthook": "^1.13.6",
     "postcss": "^8.5.3",
     "prettier": "^3.6.2",
     "typescript": "^5.8.2",
