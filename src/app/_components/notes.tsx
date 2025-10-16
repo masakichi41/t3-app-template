@@ -15,7 +15,6 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-import SampleImage from "@/assets/sample.webp";
 import { api } from "@/trpc/react";
 
 export const Notes = () => {
@@ -281,18 +280,6 @@ export const Notes = () => {
           </Stack>
         )}
       </Stack>
-
-      {/* サンプル画像 */}
-      <Image
-        src={SampleImage.src}
-        alt="Sample Notes"
-        borderRadius="lg"
-        boxShadow="lg"
-        maxH="400px"
-        objectFit="contain"
-        mx="auto"
-        mt={8}
-      />
     </Stack>
   );
 };
