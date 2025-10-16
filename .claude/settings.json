@@ -15,21 +15,17 @@
   },
   "permissions": {
     "allow": [
-      // explore
       "Bash(fd:*)",
       "Bash(cat:*)",
-      // pnpm
       "Bash(pnpm install)",
       "Bash(pnpm dev)",
       "Bash(pnpm dev:all)",
       "Bash(pnpm build)",
-      // lint
       "Bash(pnpm typecheck)",
       "Bash(pnpm lint)",
       "Bash(pnpm lint:fix)",
       "Bash(pnpm format)",
       "Bash(pnpm format:check)",
-      // db
       "Bash(pnpm db:push)",
       "Bash(pnpm db:studio)",
       "Bash(pnpm db:generate)",
@@ -40,13 +36,10 @@
       "Bash(docker compose down -v)",
       "Bash(docker compose logs)",
       "Bash(docker compose logs -f)",
-      // trash
       "Bash(rm:*)",
       "Bash(trash:*)",
-      // mcp - context7
       "mcp__context7__resolve-library-id",
       "mcp__context7__get-library-docs",
-      // mcp - playwright
       "mcp__playwright__browser_navigate",
       "mcp__playwright__browser_snapshot",
       "mcp__playwright__browser_click",
@@ -55,7 +48,6 @@
       "mcp__playwright__browser_console_messages",
       "mcp__playwright__browser_network_requests",
       "mcp__playwright__browser_wait_for",
-      // mcp - chakra-ui
       "mcp__chakra-ui__installation",
       "mcp__chakra-ui__get_component_example",
       "mcp__chakra-ui__get_component_props",
@@ -65,19 +57,11 @@
     ],
     "deny": ["Bash(pnpm ci-check)"],
     "ask": [
-      // pnpm
       "Bash(pnpm add:*)",
       "Bash(pnpm remove:*)",
-      // git
       "Bash(git push)",
       "Bash(git commit -m:* )",
       "Bash(git merge)"
     ]
-  },
-  "enabledMcpjsonServers": [
-    "context7",
-    "playwright",
-    "figma-dev-mode-mcp-server",
-    "chakra-ui"
-  ]
+  }
 }
