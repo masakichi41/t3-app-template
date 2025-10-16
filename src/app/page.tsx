@@ -72,7 +72,7 @@ export default async function Home() {
               <Button
                 asChild
                 rounded="lg"
-                bg="whiteAlpha.200"
+                bg="whiteAlpha.900"
                 px={8}
                 py={4}
                 fontWeight="semibold"
