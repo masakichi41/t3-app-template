@@ -157,6 +157,31 @@ export const bar = () => {};
 - 適切な認証設定
 - プロジェクトのリンターで検証
 
+### Claude Code Hooks
+
+このプロジェクトでは、Claude Codeのファイル編集時に自動でコード品質チェックを実行するhooksが設定されています。
+
+#### 自動実行される処理
+
+WriteまたはEditツールを使用してファイルを編集すると、以下の処理が自動実行されます：
+
+1. **TypeScript型チェック** (`pnpm typecheck`)
+2. **ESLint自動修正** (`pnpm lint:fix`)
+3. **Prettierフォーマット** (`pnpm format`)
+
+エラーが検出された場合は、Claude Codeにフィードバックが返され、エラー内容が表示されます。
+
+#### 設定ファイル
+
+- **Hook設定**: `.claude/settings.json`
+- **Hookスクリプト**: `.claude/hooks/post-edit-format.sh`
+
+#### 注意事項
+
+- Hooksは自動的に実行されるため、手動で`pnpm ci-check`を実行する必要はありません
+- エラーが発生した場合は、修正後に再度ファイルを編集することでhookが再実行されます
+- Hookのタイムアウトは60秒に設定されています
+
 ---
 
 ## 🏗️ アーキテクチャ
@@ -259,7 +284,10 @@ export const output = NoteDTO;           // サービス出力
 #### サービス実装
 
 ```typescript
-export const execute = async (deps: Deps, cmd: Request): AsyncResult<Output, AppError> => {
+export const execute = async (
+  deps: Deps,
+  cmd: Request,
+): AsyncResult<Output, AppError> => {
   // 認証チェック
   if (!deps.authUserId) return Err(Errors.auth());
 
