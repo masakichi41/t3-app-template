@@ -1,4 +1,18 @@
 {
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/post-edit-format.sh",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       // explore
@@ -65,19 +79,5 @@
     "playwright",
     "figma-dev-mode-mcp-server",
     "chakra-ui"
-  ],
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit|NotebookEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": ".claude/hooks/post-edit-format.sh",
-            "timeout": 60
-          }
-        ]
-      }
-    ]
-  }
+  ]
 }
