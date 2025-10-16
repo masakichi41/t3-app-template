@@ -22,7 +22,7 @@ TEMP_OUTPUT=$(mktemp)
 TEMP_DETAILS=$(mktemp)
 trap "rm -f $TEMP_OUTPUT $TEMP_DETAILS" EXIT
 
-echo "【コード品質チェック】" > "$TEMP_OUTPUT"
+echo "[PostEditCheck]" > "$TEMP_OUTPUT"
 
 # TypeCheckを実行
 if pnpm typecheck > "$TEMP_DETAILS" 2>&1; then
@@ -30,9 +30,8 @@ if pnpm typecheck > "$TEMP_DETAILS" 2>&1; then
   TYPECHECK_OK=1
 else
   echo "✗ [1/3] TypeCheck: エラーが発生しました" >> "$TEMP_OUTPUT"
-  echo "" >> "$TEMP_OUTPUT"
   cat "$TEMP_DETAILS" >> "$TEMP_OUTPUT"
-  echo "" >> "$TEMP_OUTPUT"
+  echo "---" >> "$TEMP_OUTPUT"
   TYPECHECK_OK=0
 fi
 
@@ -42,9 +41,8 @@ if pnpm lint:fix > "$TEMP_DETAILS" 2>&1; then
   LINT_OK=1
 else
   echo "✗ [2/3] ESLint: エラーが発生しました" >> "$TEMP_OUTPUT"
-  echo "" >> "$TEMP_OUTPUT"
   cat "$TEMP_DETAILS" >> "$TEMP_OUTPUT"
-  echo "" >> "$TEMP_OUTPUT"
+  echo "---" >> "$TEMP_OUTPUT"
   LINT_OK=0
 fi
 
@@ -54,9 +52,8 @@ if pnpm format > "$TEMP_DETAILS" 2>&1; then
   FORMAT_OK=1
 else
   echo "✗ [3/3] Prettier: エラーが発生しました" >> "$TEMP_OUTPUT"
-  echo "" >> "$TEMP_OUTPUT"
   cat "$TEMP_DETAILS" >> "$TEMP_OUTPUT"
-  echo "" >> "$TEMP_OUTPUT"
+  echo "---" >> "$TEMP_OUTPUT"
   FORMAT_OK=0
 fi
 
@@ -67,7 +64,7 @@ if [[ $TYPECHECK_OK -eq 1 ]] && [[ $LINT_OK -eq 1 ]] && [[ $FORMAT_OK -eq 1 ]]; 
   # 成功時のJSON出力
   cat "$TEMP_OUTPUT" | jq -Rs '{
     decision: "approve",
-    reason: "コード品質チェック完了",
+    reason: "コード品質チェックに合格しました",
     systemMessage: .
   }'
   exit 0
