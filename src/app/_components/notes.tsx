@@ -1,5 +1,18 @@
 "use client";
 
+import {
+  Box,
+  Button,
+  Card,
+  Field,
+  Heading,
+  HStack,
+  Image,
+  Input,
+  Stack,
+  Text,
+  Textarea,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 import { api } from "@/trpc/react";
@@ -79,138 +92,194 @@ export const Notes = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl space-y-8">
+    <Stack gap={8} w="full" maxW="4xl" mx="auto">
       {/* Note作成フォーム */}
-      <div className="rounded-lg bg-white/10 p-6">
-        <h2 className="mb-4 font-bold text-2xl">新しいNoteを作成</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <input
-              type="text"
-              placeholder="タイトル"
-              value={title}
-              onChange={e => setTitle(e.target.value)}
-              className="w-full rounded-lg bg-white/10 px-4 py-2 text-white placeholder-white/50"
-              maxLength={100}
-            />
-          </div>
-          <div>
-            <textarea
-              placeholder="内容"
-              value={content}
-              onChange={e => setContent(e.target.value)}
-              className="w-full rounded-lg bg-white/10 px-4 py-2 text-white placeholder-white/50"
-              rows={4}
-              maxLength={10000}
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-white/10 px-6 py-3 font-semibold transition hover:bg-white/20 disabled:opacity-50"
-            disabled={createNote.isPending || !title.trim() || !content.trim()}>
-            {createNote.isPending ? "作成中..." : "作成"}
-          </button>
-        </form>
-      </div>
+      <Card.Root bg="whiteAlpha.200">
+        <Card.Body>
+          <Heading size="xl" mb={4} fontWeight="bold">
+            新しいNoteを作成
+          </Heading>
+          <form onSubmit={handleSubmit}>
+            <Stack gap={4}>
+              <Field.Root>
+                <Input
+                  placeholder="タイトル"
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                  bg="whiteAlpha.200"
+                  color="white"
+                  _placeholder={{ color: "whiteAlpha.600" }}
+                  rounded="lg"
+                  maxLength={100}
+                />
+              </Field.Root>
+              <Field.Root>
+                <Textarea
+                  placeholder="内容"
+                  value={content}
+                  onChange={e => setContent(e.target.value)}
+                  bg="whiteAlpha.200"
+                  color="white"
+                  _placeholder={{ color: "whiteAlpha.600" }}
+                  rounded="lg"
+                  rows={4}
+                  maxLength={10000}
+                />
+              </Field.Root>
+              <Button
+                type="submit"
+                w="full"
+                bg="whiteAlpha.200"
+                fontWeight="semibold"
+                rounded="lg"
+                _hover={{ bg: "whiteAlpha.300" }}
+                disabled={
+                  createNote.isPending || !title.trim() || !content.trim()
+                }>
+                {createNote.isPending ? "作成中..." : "作成"}
+              </Button>
+            </Stack>
+          </form>
+        </Card.Body>
+      </Card.Root>
 
       {/* Note一覧 */}
-      <div className="space-y-4">
-        <h2 className="font-bold text-2xl">Noteリスト</h2>
+      <Stack gap={4}>
+        <Heading size="xl" fontWeight="bold">
+          Noteリスト
+        </Heading>
         {notes.notes.length === 0 ? (
-          <div className="rounded-lg bg-white/5 p-8 text-center text-white/60">
+          <Box
+            bg="whiteAlpha.100"
+            p={8}
+            rounded="lg"
+            textAlign="center"
+            color="whiteAlpha.700">
             まだNoteがありません。上のフォームから作成してください。
-          </div>
+          </Box>
         ) : (
-          <div className="space-y-4">
+          <Stack gap={4}>
             {notes.notes.map(note => {
               const isEditing = editingNoteId === note.id;
 
               return (
-                <div
+                <Card.Root
                   key={note.id}
-                  className="rounded-lg bg-white/10 p-6 transition hover:bg-white/15">
-                  {isEditing ? (
-                    // 編集モード
-                    <div className="space-y-4">
-                      <div>
-                        <input
-                          type="text"
-                          value={editTitle}
-                          onChange={e => setEditTitle(e.target.value)}
-                          className="w-full rounded-lg bg-white/10 px-4 py-2 text-white placeholder-white/50"
-                          maxLength={100}
-                          placeholder="タイトル"
-                        />
-                      </div>
-                      <div>
-                        <textarea
-                          value={editContent}
-                          onChange={e => setEditContent(e.target.value)}
-                          className="w-full rounded-lg bg-white/10 px-4 py-2 text-white placeholder-white/50"
-                          rows={4}
-                          maxLength={10000}
-                          placeholder="内容"
-                        />
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          onClick={() => handleEditSubmit(note.id)}
-                          className="rounded-lg bg-white/10 px-4 py-2 font-semibold transition hover:bg-white/20 disabled:opacity-50"
-                          disabled={
-                            updateNote.isPending ||
-                            !editTitle.trim() ||
-                            !editContent.trim()
-                          }>
-                          {updateNote.isPending ? "保存中..." : "保存"}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={handleEditCancel}
-                          className="rounded-lg bg-white/5 px-4 py-2 font-semibold transition hover:bg-white/10"
-                          disabled={updateNote.isPending}>
-                          キャンセル
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    // 表示モード
-                    <>
-                      <div className="mb-2 flex items-start justify-between">
-                        <h3 className="font-bold text-xl">{note.title}</h3>
-                        <div className="flex gap-2">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              handleEditClick(note.id, note.title, note.content)
-                            }
-                            className="rounded-lg bg-white/10 px-3 py-1 text-sm font-semibold transition hover:bg-white/20">
-                            編集
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteClick(note.id)}
-                            className="rounded-lg bg-red-500/20 px-3 py-1 text-sm font-semibold text-red-200 transition hover:bg-red-500/30"
-                            disabled={deleteNote.isPending}>
-                            削除
-                          </button>
-                        </div>
-                      </div>
-                      <p className="mb-4 whitespace-pre-wrap text-white/80">
-                        {note.content}
-                      </p>
-                      <div className="text-white/40 text-sm">
-                        作成日時:{" "}
-                        {new Date(note.createdAt).toLocaleString("ja-JP")}
-                      </div>
-                    </>
-                  )}
-                </div>
+                  bg="whiteAlpha.200"
+                  _hover={{ bg: "whiteAlpha.250" }}
+                  transition="background 0.2s">
+                  <Card.Body>
+                    {isEditing ? (
+                      // 編集モード
+                      <Stack gap={4}>
+                        <Field.Root>
+                          <Input
+                            value={editTitle}
+                            onChange={e => setEditTitle(e.target.value)}
+                            bg="whiteAlpha.200"
+                            color="white"
+                            _placeholder={{ color: "whiteAlpha.600" }}
+                            rounded="lg"
+                            maxLength={100}
+                            placeholder="タイトル"
+                          />
+                        </Field.Root>
+                        <Field.Root>
+                          <Textarea
+                            value={editContent}
+                            onChange={e => setEditContent(e.target.value)}
+                            bg="whiteAlpha.200"
+                            color="white"
+                            _placeholder={{ color: "whiteAlpha.600" }}
+                            rounded="lg"
+                            rows={4}
+                            maxLength={10000}
+                            placeholder="内容"
+                          />
+                        </Field.Root>
+                        <HStack gap={2}>
+                          <Button
+                            onClick={() => handleEditSubmit(note.id)}
+                            bg="whiteAlpha.200"
+                            fontWeight="semibold"
+                            rounded="lg"
+                            _hover={{ bg: "whiteAlpha.300" }}
+                            disabled={
+                              updateNote.isPending ||
+                              !editTitle.trim() ||
+                              !editContent.trim()
+                            }>
+                            {updateNote.isPending ? "保存中..." : "保存"}
+                          </Button>
+                          <Button
+                            onClick={handleEditCancel}
+                            bg="whiteAlpha.100"
+                            fontWeight="semibold"
+                            rounded="lg"
+                            _hover={{ bg: "whiteAlpha.200" }}
+                            disabled={updateNote.isPending}>
+                            キャンセル
+                          </Button>
+                        </HStack>
+                      </Stack>
+                    ) : (
+                      // 表示モード
+                      <>
+                        <HStack
+                          justify="space-between"
+                          align="flex-start"
+                          mb={2}>
+                          <Heading size="lg" fontWeight="bold">
+                            {note.title}
+                          </Heading>
+                          <HStack gap={2}>
+                            <Button
+                              onClick={() =>
+                                handleEditClick(
+                                  note.id,
+                                  note.title,
+                                  note.content,
+                                )
+                              }
+                              size="sm"
+                              bg="whiteAlpha.200"
+                              fontWeight="semibold"
+                              rounded="lg"
+                              _hover={{ bg: "whiteAlpha.300" }}>
+                              編集
+                            </Button>
+                            <Button
+                              onClick={() => handleDeleteClick(note.id)}
+                              size="sm"
+                              bg="red.500/20"
+                              color="red.200"
+                              fontWeight="semibold"
+                              rounded="lg"
+                              _hover={{ bg: "red.500/30" }}
+                              disabled={deleteNote.isPending}>
+                              削除
+                            </Button>
+                          </HStack>
+                        </HStack>
+                        <Text
+                          mb={4}
+                          whiteSpace="pre-wrap"
+                          color="whiteAlpha.900">
+                          {note.content}
+                        </Text>
+                        <Text color="whiteAlpha.500" fontSize="sm">
+                          作成日時:{" "}
+                          {new Date(note.createdAt).toLocaleString("ja-JP")}
+                        </Text>
+                      </>
+                    )}
+                  </Card.Body>
+                </Card.Root>
               );
             })}
-          </div>
+          </Stack>
         )}
-      </div>
-    </div>
+      </Stack>
+    </Stack>
   );
 };

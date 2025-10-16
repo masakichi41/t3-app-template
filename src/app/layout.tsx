@@ -1,7 +1,6 @@
-import "@/styles/globals.css";
-
 import { Geist } from "next/font/google";
 
+import { Provider } from "@/components/ui/provider";
 import { TRPCReactProvider } from "@/trpc/react";
 
 import type { Metadata } from "next";
@@ -21,9 +20,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable}`}>
-      <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+    <html lang="ja" suppressHydrationWarning className={`${geist.variable}`}>
+      <body className="light">
+        <Provider>
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </Provider>
       </body>
     </html>
   );
