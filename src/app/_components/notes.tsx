@@ -7,6 +7,7 @@ import {
   Field,
   Heading,
   HStack,
+  Image,
   Input,
   Stack,
   Text,
@@ -14,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-
+import SampleImage from "@/assets/sample.webp";
 import { api } from "@/trpc/react";
 
 export const Notes = () => {
@@ -105,7 +106,7 @@ export const Notes = () => {
                 <Input
                   placeholder="タイトル"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={e => setTitle(e.target.value)}
                   bg="whiteAlpha.200"
                   color="white"
                   _placeholder={{ color: "whiteAlpha.600" }}
@@ -117,7 +118,7 @@ export const Notes = () => {
                 <Textarea
                   placeholder="内容"
                   value={content}
-                  onChange={(e) => setContent(e.target.value)}
+                  onChange={e => setContent(e.target.value)}
                   bg="whiteAlpha.200"
                   color="white"
                   _placeholder={{ color: "whiteAlpha.600" }}
@@ -133,8 +134,9 @@ export const Notes = () => {
                 fontWeight="semibold"
                 rounded="lg"
                 _hover={{ bg: "whiteAlpha.300" }}
-                disabled={createNote.isPending || !title.trim() || !content.trim()}
-              >
+                disabled={
+                  createNote.isPending || !title.trim() || !content.trim()
+                }>
                 {createNote.isPending ? "作成中..." : "作成"}
               </Button>
             </Stack>
@@ -153,13 +155,12 @@ export const Notes = () => {
             p={8}
             rounded="lg"
             textAlign="center"
-            color="whiteAlpha.700"
-          >
+            color="whiteAlpha.700">
             まだNoteがありません。上のフォームから作成してください。
           </Box>
         ) : (
           <Stack gap={4}>
-            {notes.notes.map((note) => {
+            {notes.notes.map(note => {
               const isEditing = editingNoteId === note.id;
 
               return (
@@ -167,8 +168,7 @@ export const Notes = () => {
                   key={note.id}
                   bg="whiteAlpha.200"
                   _hover={{ bg: "whiteAlpha.250" }}
-                  transition="background 0.2s"
-                >
+                  transition="background 0.2s">
                   <Card.Body>
                     {isEditing ? (
                       // 編集モード
@@ -176,7 +176,7 @@ export const Notes = () => {
                         <Field.Root>
                           <Input
                             value={editTitle}
-                            onChange={(e) => setEditTitle(e.target.value)}
+                            onChange={e => setEditTitle(e.target.value)}
                             bg="whiteAlpha.200"
                             color="white"
                             _placeholder={{ color: "whiteAlpha.600" }}
@@ -188,7 +188,7 @@ export const Notes = () => {
                         <Field.Root>
                           <Textarea
                             value={editContent}
-                            onChange={(e) => setEditContent(e.target.value)}
+                            onChange={e => setEditContent(e.target.value)}
                             bg="whiteAlpha.200"
                             color="white"
                             _placeholder={{ color: "whiteAlpha.600" }}
@@ -209,8 +209,7 @@ export const Notes = () => {
                               updateNote.isPending ||
                               !editTitle.trim() ||
                               !editContent.trim()
-                            }
-                          >
+                            }>
                             {updateNote.isPending ? "保存中..." : "保存"}
                           </Button>
                           <Button
@@ -219,8 +218,7 @@ export const Notes = () => {
                             fontWeight="semibold"
                             rounded="lg"
                             _hover={{ bg: "whiteAlpha.200" }}
-                            disabled={updateNote.isPending}
-                          >
+                            disabled={updateNote.isPending}>
                             キャンセル
                           </Button>
                         </HStack>
@@ -228,21 +226,27 @@ export const Notes = () => {
                     ) : (
                       // 表示モード
                       <>
-                        <HStack justify="space-between" align="flex-start" mb={2}>
+                        <HStack
+                          justify="space-between"
+                          align="flex-start"
+                          mb={2}>
                           <Heading size="lg" fontWeight="bold">
                             {note.title}
                           </Heading>
                           <HStack gap={2}>
                             <Button
                               onClick={() =>
-                                handleEditClick(note.id, note.title, note.content)
+                                handleEditClick(
+                                  note.id,
+                                  note.title,
+                                  note.content,
+                                )
                               }
                               size="sm"
                               bg="whiteAlpha.200"
                               fontWeight="semibold"
                               rounded="lg"
-                              _hover={{ bg: "whiteAlpha.300" }}
-                            >
+                              _hover={{ bg: "whiteAlpha.300" }}>
                               編集
                             </Button>
                             <Button
@@ -253,17 +257,20 @@ export const Notes = () => {
                               fontWeight="semibold"
                               rounded="lg"
                               _hover={{ bg: "red.500/30" }}
-                              disabled={deleteNote.isPending}
-                            >
+                              disabled={deleteNote.isPending}>
                               削除
                             </Button>
                           </HStack>
                         </HStack>
-                        <Text mb={4} whiteSpace="pre-wrap" color="whiteAlpha.900">
+                        <Text
+                          mb={4}
+                          whiteSpace="pre-wrap"
+                          color="whiteAlpha.900">
                           {note.content}
                         </Text>
                         <Text color="whiteAlpha.500" fontSize="sm">
-                          作成日時: {new Date(note.createdAt).toLocaleString("ja-JP")}
+                          作成日時:{" "}
+                          {new Date(note.createdAt).toLocaleString("ja-JP")}
                         </Text>
                       </>
                     )}
@@ -274,6 +281,18 @@ export const Notes = () => {
           </Stack>
         )}
       </Stack>
+
+      {/* サンプル画像 */}
+      <Image
+        src={SampleImage.src}
+        alt="Sample Notes"
+        borderRadius="lg"
+        boxShadow="lg"
+        maxH="400px"
+        objectFit="contain"
+        mx="auto"
+        mt={8}
+      />
     </Stack>
   );
 };
