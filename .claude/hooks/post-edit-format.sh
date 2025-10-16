@@ -22,7 +22,7 @@ TEMP_OUTPUT=$(mktemp)
 TEMP_DETAILS=$(mktemp)
 trap "rm -f $TEMP_OUTPUT $TEMP_DETAILS" EXIT
 
-echo "[Claude Code Hook] コード品質チェックを実行中..." > "$TEMP_OUTPUT"
+echo "【コード品質チェック】" > "$TEMP_OUTPUT"
 
 # TypeCheckを実行
 if pnpm typecheck > "$TEMP_DETAILS" 2>&1; then
