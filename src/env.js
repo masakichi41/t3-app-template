@@ -6,12 +6,11 @@ const {
   AUTH_SECRET,
   AUTH_DISCORD_ID,
   AUTH_DISCORD_SECRET,
-  POSTGRES_USER,
-  POSTGRES_PASSWORD,
-  POSTGRES_DB,
-  POSTGRES_HOST,
-  POSTGRES_PORT,
+  LOCAL_DATABESE_URL,
+  PROD_DATABASE_URL,
   SKIP_ENV_VALIDATION,
+  DB_RUNTIME,
+  MIGRATE_PROD_DATABASE_URL,
 } = process.env;
 
 export const env = createEnv({
@@ -27,6 +26,8 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
+    DB_RUNTIME: z.enum(["local", "neon"]).default("local"),
+    MIGRATE_PROD_DATABASE_URL: z.string().url(),
   },
 
   /**
@@ -46,8 +47,12 @@ export const env = createEnv({
     AUTH_SECRET: AUTH_SECRET,
     AUTH_DISCORD_ID: AUTH_DISCORD_ID,
     AUTH_DISCORD_SECRET: AUTH_DISCORD_SECRET,
-    DATABASE_URL: `postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}`,
+    DATABASE_URL:
+      DB_RUNTIME === "local" ? LOCAL_DATABESE_URL : PROD_DATABASE_URL,
     NODE_ENV: NODE_ENV,
+    DB_RUNTIME: DB_RUNTIME,
+    MIGRATE_PROD_DATABASE_URL:
+      DB_RUNTIME === "local" ? LOCAL_DATABESE_URL : MIGRATE_PROD_DATABASE_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
