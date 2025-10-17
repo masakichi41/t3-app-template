@@ -1,5 +1,5 @@
 ---
-argument-hint: [issue番号(int)]
+argument-hint: [issue番号]
 description: issueから共通UIコンポーネントを実装するためのコマンド
 ---
 

@@ -1,5 +1,5 @@
 ---
-argument-hint: [issue番号(int)]
+argument-hint: [issue番号]
 description: issueからページとページ専用コンポーネントを実装するためのコマンド
 ---
 

@@ -1,5 +1,5 @@
 ---
-argument-hint: [issue番号(int)]
+argument-hint: [issue番号]
 description: sub-agentを用いてissueから新しいユースケースを実装するためのテンプレート
 ---
 
