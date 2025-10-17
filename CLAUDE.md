@@ -7,10 +7,11 @@
 - **All file writes must use UTF-8 encoding with LF (Unix-style) line endings, not Shift-JIS**.
 - You must **think exclusively in English**. However, you must need to **respond in Japanese**.
 - To maximize efficiency, if you need to execute multiple independent processes, invoke those tools concurrently, not sequentially.
+- **Do not use emojis in any documentation, code comments, or commit messages unless explicitly requested by the user**.
 
 ---
 
-## 📦 プロジェクト概要
+## プロジェクト概要
 
 以下の技術で構築されたフルスタックTypeScriptアプリケーションテンプレート：
 
@@ -25,7 +26,7 @@
 
 ---
 
-## 🚀 クイックスタート
+## クイックスタート
 
 ### 前提条件
 
@@ -45,7 +46,7 @@ cp .env.example .env
 # .envファイルを必要な値で編集
 
 # 3. プロジェクトの初期化（ワンコマンド）
-pnpm init
+pnpm run init
 # 実行内容：pnpm i && docker compose up -d && pnpm db:push
 
 # 4. 開発サーバーの起動
@@ -94,7 +95,7 @@ docker compose logs -f   # ログ表示
 
 ---
 
-## 💻 開発ガイドライン
+## 開発ガイドライン
 
 ### 新機能の追加フロー
 
@@ -108,7 +109,6 @@ docker compose logs -f   # ログ表示
    - `{action}/service.ts` - ビジネスロジック
    - `{action}/endpoint.trpc.ts` - APIエンドポイント
 5. `src/server/api/root.ts`にルーターを登録
-6. `pnpm ci-check`で検証（typecheck + lint + format）
 
 ### コーディング規約
 
@@ -139,18 +139,6 @@ export const bar = () => {};
 3. **エンドポイントで変換** - `AppError`を`TRPCError`に変換
 4. **トランザクションスコープ** - リポジトリではなくサービス層でラップ
 
-#### コード品質チェック
-
-**重要：すべてのコード変更後は必ず `pnpm ci-check` を実行してください。**
-
-このコマンドは以下をまとめて実行します：
-
-- `pnpm typecheck` - TypeScript型エラーの検証
-- `pnpm lint` - ESLintによるコード品質チェック
-- `pnpm format` - Prettierによるコードフォーマット確認
-
-コミットやプルリクエストの前に必ずこのチェックを通すことで、コード品質を保証します。
-
 ### Claude Agents
 
 このプロジェクトには`.claude/agents/`にClaude Agent設定が含まれています：
@@ -169,9 +157,32 @@ export const bar = () => {};
 - 適切な認証設定
 - プロジェクトのリンターで検証
 
+### Claude Code Hooks
+
+このプロジェクトでは、Claude Codeのファイル編集時に自動でコード品質チェックを実行するhooksが設定されています。
+
+#### 自動実行される処理
+
+WriteまたはEditツールを使用してファイルを編集すると、以下の処理が自動実行されます：
+
+1. **TypeScript型チェック** (`pnpm typecheck`)
+2. **ESLint自動修正** (`pnpm lint:fix`)
+3. **Prettierフォーマット** (`pnpm format`)
+
+エラーが検出された場合は、Claude Codeにフィードバックが返され、エラー内容が表示されます。
+
+#### 設定ファイル
+
+- **Hook設定**: `.claude/settings.json`
+- **Hookスクリプト**: `.claude/hooks/post-edit-format.sh`
+
+#### 注意事項
+
+- Hooksは自動的に実行されるため、Claude Codeが`pnpm ci-check`を実行する必要はありません
+
 ---
 
-## 🏗️ アーキテクチャ
+## アーキテクチャ
 
 ### プロジェクト構造
 
@@ -312,7 +323,7 @@ export const createNote = protectedProcedure
 
 ---
 
-## 🔧 技術設定
+## 技術設定
 
 ### エラーハンドリング
 
@@ -483,7 +494,7 @@ POSTGRES_PORT=5334
 
 ---
 
-## 📚 リファレンス
+## リファレンス
 
 ### テストアプローチ
 

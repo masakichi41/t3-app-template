@@ -7,7 +7,6 @@ import {
   Field,
   Heading,
   HStack,
-  Image,
   Input,
   Stack,
   Text,
