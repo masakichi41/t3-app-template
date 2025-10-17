@@ -7,10 +7,11 @@
 - **All file writes must use UTF-8 encoding with LF (Unix-style) line endings, not Shift-JIS**.
 - You must **think exclusively in English**. However, you must need to **respond in Japanese**.
 - To maximize efficiency, if you need to execute multiple independent processes, invoke those tools concurrently, not sequentially.
+- **Do not use emojis in any documentation, code comments, or commit messages unless explicitly requested by the user**.
 
 ---
 
-## 📦 プロジェクト概要
+## プロジェクト概要
 
 以下の技術で構築されたフルスタックTypeScriptアプリケーションテンプレート：
 
@@ -25,7 +26,7 @@
 
 ---
 
-## 🚀 クイックスタート
+## クイックスタート
 
 ### 前提条件
 
@@ -94,7 +95,7 @@ docker compose logs -f   # ログ表示
 
 ---
 
-## 💻 開発ガイドライン
+## 開発ガイドライン
 
 ### 新機能の追加フロー
 
@@ -181,7 +182,7 @@ WriteまたはEditツールを使用してファイルを編集すると、以�
 
 ---
 
-## 🏗️ アーキテクチャ
+## アーキテクチャ
 
 ### プロジェクト構造
 
@@ -322,7 +323,7 @@ export const createNote = protectedProcedure
 
 ---
 
-## 🔧 技術設定
+## 技術設定
 
 ### エラーハンドリング
 
@@ -493,7 +494,7 @@ POSTGRES_PORT=5334
 
 ---
 
-## 📚 リファレンス
+## リファレンス
 
 ### テストアプローチ
 
