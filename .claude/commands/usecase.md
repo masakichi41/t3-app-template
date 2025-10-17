@@ -15,7 +15,7 @@ sub-agent「usecase-maker」を用いてissue $1 から新しいユースケー�
 - `git checkout main` でmainブランチに移動
 - `git pull origin main` で最新のリモート状態を取得
 - `git checkout -b <適切なブランチ名>` で新しいブランチを作成
-  - ブランチ命名規則: `claude/#$1/<簡潔な説明>`（例: `claude/#123/add-note-create`）
+  - ブランチ命名規則: `claude/#$1/usecase/<簡潔な説明>`（例: `claude/#123usecase//add-note-create`）
 
 ### 3. 実装
 - sub-agent「usecase-maker」を呼び出し、実装する
